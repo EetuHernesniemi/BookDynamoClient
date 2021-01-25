@@ -13,12 +13,12 @@ export class BookGridComponent implements OnInit {
   constructor(private olBooksService: OlBooksService) {}
 
   ngOnInit(): void {
-    this.getLatestBooksData();
+    this.getLatestHealthBooks();
   }
   
-  getBookSearchData(){
+  getHealthBookSearchData(){
     //this.olBooksService.getBookSearchData();
-    this.olBooksService.tryToGetBookSearchData()
+    this.olBooksService.tryToGetHealthBookSearchData()
     .subscribe((data) => {
       this.booksData = data;
     },
@@ -27,7 +27,7 @@ export class BookGridComponent implements OnInit {
     });
   }
 
-  getLatestBooksData(){
+  getLatestHealthBooks(){
     this.olBooksService.tryToGetLatestHealthBooksData()
     .subscribe((data) => {
       this.booksData = data;

@@ -2,7 +2,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OlBooksService } from 'src/app/services/ol-books.service';
-import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-books-grid',
@@ -12,18 +11,19 @@ import { Injectable } from '@angular/core';
 
 export class BookGridComponent implements OnInit {
   booksData: Object;
+  booksCount: number;
   
   constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
+    this.booksData = {};
     this.getLatestHealthBooks();
   }
   
   getHealthBookSearchData(){
-    //this.olBooksService.getBookSearchData();
     this.olBooksService.tryToGetHealthBookSearchData()
     .subscribe((data) => {
-      this.booksData = data;
+      this.booksData = JSON.stringify(data);
     },
     (error) => {
       this.handleHttpError(error);
@@ -34,6 +34,8 @@ export class BookGridComponent implements OnInit {
     this.olBooksService.tryToGetLatestHealthBooksData()
     .subscribe((data) => {
       this.booksData = data;
+      this.booksData = JSON.stringify(data);
+      console.log(this.booksData);
     },
     (error) => {
       this.handleHttpError(error);

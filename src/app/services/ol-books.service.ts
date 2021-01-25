@@ -1,10 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-export interface olBook{
-  name: string;
-}
-
 @Injectable({
   providedIn: 'root'
 })
@@ -19,7 +15,7 @@ export class OlBooksService {
   }
 
   tryToGetLatestHealthBooksData(){
-    const queryUrl = this.serviceBaseUrl + "/subjects/health.json";
+    const queryUrl = this.serviceBaseUrl + "/people/zxcvb123/lists/OL138839L/seeds.json";
     return this.http.get(queryUrl);
   }
 }

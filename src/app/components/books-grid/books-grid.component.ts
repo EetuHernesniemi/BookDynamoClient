@@ -1,6 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { OlBookEntry } from 'src/app/interfaces/ol-book-entry';
+import { OlBookEntryArray } from 'src/app/interfaces/ol-book-entry-array';
 import { OlBooksService } from 'src/app/services/ol-books.service';
 
 @Component({
@@ -10,32 +12,38 @@ import { OlBooksService } from 'src/app/services/ol-books.service';
 })
 
 export class BookGridComponent implements OnInit {
-  booksData: Object;
-  booksCount: number;
+  bookEntries: OlBookEntryArray;
   
   constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
-    this.booksData = {};
     this.getLatestHealthBooks();
   }
   
-  getHealthBookSearchData(){
-    this.olBooksService.tryToGetHealthBookSearchData()
-    .subscribe((data) => {
-      this.booksData = JSON.stringify(data);
-    },
-    (error) => {
-      this.handleHttpError(error);
-    });
+  getHealthBookSearchData(){//not active
+    // this.olBooksService.tryToGetHealthBookSearchData()
+    // .subscribe((data) => {
+    //   this.booksData = JSON.parse(JSON.stringify(data));
+      
+    // },
+    // (error) => {
+    //   this.handleHttpError(error);
+    // });
   }
 
   getLatestHealthBooks(){
     this.olBooksService.tryToGetLatestHealthBooksData()
     .subscribe((data) => {
-      this.booksData = data;
-      this.booksData = JSON.stringify(data);
-      console.log(this.booksData);
+      const jsonData = JSON.parse(JSON.stringify(data));
+      if('entries' in jsonData){
+        const dataArray: OlBookEntryArray = jsonData.entries;
+        if(dataArray.length > 100) dataArray.length = 100;
+        this.bookEntries = dataArray;
+      }else{
+        console.log('Unexpected json values received');
+        this.displayErrorBar();
+      }
+      console.log(this.bookEntries);
     },
     (error) => {
       this.handleHttpError(error);
@@ -54,13 +62,19 @@ export class BookGridComponent implements OnInit {
         `http body was: ${error.error}`);
     }
     // user-facing error message.
-    // alert('Something went wrong. Try again later.');
+    this.displayErrorBar();
+  }
 
+  private displayErrorBar(){
     this.snackBar.open("Something went wrong. Try again later.", "Ok", {
       verticalPosition:'top',
       duration: 2000,
       panelClass: 'error-snackbar'
     });
+  }
+
+  tileClick(bookEntry?: OlBookEntry) {
+    console.log(bookEntry);
   }
 
 

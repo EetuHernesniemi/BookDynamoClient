@@ -1,14 +1,47 @@
 mat-grid-tile {
     background: lightblue;
+    opacity: 0.4;
 }
 
-.form-field-wrapper{
-  width: 100%;
+.top-area{
+  width:100%;
   height: 60px;
 }
 
-.form-field {
-  width: 300px;
-  float:right;
+.title-area{
+  top:0;
+  bottom:0;
+  width: 50%;
+  height: 100%;
+  background-color: white;
+  display:inline-block;
+  
 }
 
+.form-field-wrapper{
+  width: 50%;
+  background-color: white;
+  display:inline-block;
+}
+
+.form-field {
+  width: 290px;
+  float: right;
+  vertical-align: bottom;
+  background-color: white;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.dynamo-spinner-wrapper{
+  z-index: 1;
+}
+
+.content-wrapper{
+  z-index: 1;
+  width:90%;
+  height:90%;
+  overflow-y: auto;
+  margin: 0 auto;
+  margin-top:60px;
+}

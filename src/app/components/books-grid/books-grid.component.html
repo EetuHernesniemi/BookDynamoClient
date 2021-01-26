@@ -2,24 +2,22 @@
   <mat-spinner aria-label="book-grid-spinner"></mat-spinner>
 </div>
 <div *ngIf="loadingDone;" class="content-wrapper">
-  <div class="top-area">
-  <div class="title-area">
-    <section class="mat-typography">
-      <h1 class="collapsing-margin-text">Book Dynamo</h1>
-    </section>
-  </div>
-  <div class="form-field-wrapper">
-    <mat-form-field class="form-field">
-      <mat-label>Search Books</mat-label>
-      <input matInput type="text" [(ngModel)]="searchValue">
-      <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
-        <mat-icon>clear</mat-icon>
-      </button>
-      <button mat-button  matSuffix mat-icon-button aria-label="search">
-        <mat-icon>search</mat-icon>
-      </button>
-    </mat-form-field>
-</div>
+  <div class="row">
+    <div class="auto">
+      <h1 id="titleHeader">Book Dynamo</h1>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+      <mat-form-field class="form-field">
+        <mat-label>Search Books</mat-label>
+        <input matInput type="text" [(ngModel)]="searchValue">
+        <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+          <mat-icon>clear</mat-icon>
+        </button>
+        <button mat-button  matSuffix mat-icon-button aria-label="search">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
 </div>
   <mat-grid-list cols="2" rowHeight="2:1" >
     <mat-grid-tile *ngFor="let bookEntry of bookEntries" (click)="tileClick(bookEntry);">

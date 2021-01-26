@@ -9,12 +9,7 @@ export class OlBooksService {
   serviceBaseUrl = 'http://openlibrary.org';
   constructor(private http: HttpClient) {}
 
-  tryToGetHealthBookSearchData(){
-    const queryUrl = this.serviceBaseUrl + "/subjects/health.json";
-    return this.http.get(queryUrl);
-  }
-
-  tryToGetLatestHealthBooksData(){
+  tryToGetDemoBooksData(){
     const queryUrl = this.serviceBaseUrl + "/people/zxcvb123/lists/OL138839L/seeds.json";
     return this.http.get(queryUrl);
   }

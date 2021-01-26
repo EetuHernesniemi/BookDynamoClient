@@ -1,5 +1,8 @@
-<mat-grid-list cols="2" rowHeight="2:1">
+<div class="dynamo-spinner-wrapper" *ngIf="!loadingDone;">
+  <mat-spinner aria-label="book-grid-spinner"></mat-spinner>
+</div>
+<mat-grid-list cols="2" rowHeight="2:1" *ngIf="loadingDone;">
     <mat-grid-tile *ngFor="let bookEntry of bookEntries" (click)="tileClick(bookEntry);">
       <app-book></app-book>
     </mat-grid-tile>
-  </mat-grid-list>
+</mat-grid-list>

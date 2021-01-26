@@ -13,26 +13,17 @@ import { OlBooksService } from 'src/app/services/ol-books.service';
 
 export class BookGridComponent implements OnInit {
   bookEntries: OlBookEntryArray;
+  loadingDone: boolean;
   
-  constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {}
+  constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {  }
 
   ngOnInit(): void {
+    this.loadingDone = false;
     this.getLatestHealthBooks();
-  }
-  
-  getHealthBookSearchData(){//not active
-    // this.olBooksService.tryToGetHealthBookSearchData()
-    // .subscribe((data) => {
-    //   this.booksData = JSON.parse(JSON.stringify(data));
-      
-    // },
-    // (error) => {
-    //   this.handleHttpError(error);
-    // });
   }
 
   getLatestHealthBooks(){
-    this.olBooksService.tryToGetLatestHealthBooksData()
+    this.olBooksService.tryToGetDemoBooksData()
     .subscribe((data) => {
       const jsonData = JSON.parse(JSON.stringify(data));
       if('entries' in jsonData){
@@ -40,13 +31,14 @@ export class BookGridComponent implements OnInit {
         if(dataArray.length > 100) dataArray.length = 100;
         this.bookEntries = dataArray;
       }else{
-        console.log('Unexpected json values received');
+        console.log('Unexpected json data values received');
         this.displayErrorBar();
       }
-      console.log(this.bookEntries);
+      this.loadingDone = true;
     },
     (error) => {
       this.handleHttpError(error);
+      this.loadingDone = true;
     });
   }
 
@@ -76,6 +68,4 @@ export class BookGridComponent implements OnInit {
   tileClick(bookEntry?: OlBookEntry) {
     console.log(bookEntry);
   }
-
-
 }

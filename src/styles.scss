@@ -7,3 +7,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .error-snackbar {
     color:yellow;
 }
+
+.dynamo-spinner-wrapper{
+    display: flex; 
+    justify-content: center; 
+    align-items: center;
+    height: calc(100vh);
+}

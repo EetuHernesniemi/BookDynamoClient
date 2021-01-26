@@ -14,11 +14,13 @@ import { OlBooksService } from 'src/app/services/ol-books.service';
 export class BookGridComponent implements OnInit {
   bookEntries: OlBookEntryArray;
   loadingDone: boolean;
+  searchValue: string;
   
   constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {  }
 
   ngOnInit(): void {
     this.loadingDone = false;
+    this.searchValue = "";
     this.getLatestHealthBooks();
     setTimeout(()=>{
       if(!this.loadingDone){//TODO: error service needed in case of multiple problems?

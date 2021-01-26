@@ -1,8 +1,23 @@
 <div class="dynamo-spinner-wrapper" *ngIf="!loadingDone;">
   <mat-spinner aria-label="book-grid-spinner"></mat-spinner>
 </div>
-<mat-grid-list cols="2" rowHeight="2:1" *ngIf="loadingDone;">
+<div *ngIf="loadingDone;">
+  <div class="form-field-wrapper">
+    <mat-form-field class="form-field">
+      <mat-label>Search Books</mat-label>
+      <input matInput type="text" [(ngModel)]="searchValue">
+      <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+        <mat-icon>clear</mat-icon>
+      </button>
+      <button mat-button  matSuffix mat-icon-button aria-label="Clear" (click)="searchValue=''">
+        <mat-icon>search</mat-icon>
+      </button>
+    </mat-form-field>
+</div>
+  <mat-grid-list cols="2" rowHeight="2:1" >
     <mat-grid-tile *ngFor="let bookEntry of bookEntries" (click)="tileClick(bookEntry);">
       <app-book></app-book>
     </mat-grid-tile>
 </mat-grid-list>
+</div>
+

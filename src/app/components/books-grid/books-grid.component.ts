@@ -20,6 +20,11 @@ export class BookGridComponent implements OnInit {
   ngOnInit(): void {
     this.loadingDone = false;
     this.getLatestHealthBooks();
+    setTimeout(()=>{
+      if(!this.loadingDone){//TODO: error service needed in case of multiple problems?
+        this.displayErrorBar();
+      }
+    },4000);
   }
 
   getLatestHealthBooks(){
@@ -60,7 +65,7 @@ export class BookGridComponent implements OnInit {
   private displayErrorBar(){
     this.snackBar.open("Something went wrong. Try again later.", "Ok", {
       verticalPosition:'top',
-      duration: 2000,
+      duration: 0,
       panelClass: 'error-snackbar'
     });
   }

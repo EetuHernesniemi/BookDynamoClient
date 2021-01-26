@@ -1,23 +1,18 @@
 mat-grid-tile {
     background: lightblue;
-    opacity: 0.4;
 }
 
 .form-field {
   width: 250px;
 }
 
-.dynamo-spinner-wrapper{
-  z-index: 1;
-}
-
 .content-wrapper{
-  z-index: 1;
   width:90%;
   height:90%;
   overflow-y: auto;
   margin: 0 auto;
   margin-top:60px;
+  overflow-x: hidden;
 }
 
 #titleHeader{

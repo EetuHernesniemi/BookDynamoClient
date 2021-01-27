@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, ChangeDetectorRef } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { OlBookEntry } from 'src/app/interfaces/ol-book-entry';
 import { OlBookEntryArray } from 'src/app/interfaces/ol-book-entry-array';
@@ -17,12 +17,20 @@ export class BookGridComponent implements OnInit {
   searchValue: string;
   screenSize: string;
   gridCols: number
-  constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {  }
+
+  @ViewChild('contentWrapper')
+  contentWrapper: ElementRef;
+
+  constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar, private cdRef:ChangeDetectorRef) {  }
 
   ngOnInit(): void {
     this.loadingDone = true;
     this.searchValue = "";
-    this.gridCols = 1;
+  }
+
+  ngAfterViewInit(){
+    this.gridToRespondToScreenWidth(this.contentWrapper.nativeElement.offsetWidth);
+    this.cdRef.detectChanges();
   }
 
   gridToRespondToScreenWidth(width: number){

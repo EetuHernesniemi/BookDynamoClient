@@ -14,6 +14,11 @@ export class OlBooksService {
     return this.http.get(queryUrl);
   }
 
+  tryToSearchBookListData(searchValue: String){
+    const queryUrl = this.serviceBaseUrl + "/search.json?q=" + searchValue;
+    return this.http.get(queryUrl);
+  }
+
   tryToGetBookData(bookUrl: String){
     const queryUrl = this.serviceBaseUrl + bookUrl + ".json";
     return this.http.get(queryUrl);

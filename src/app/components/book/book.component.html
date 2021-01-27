@@ -1,9 +1,9 @@
 <mat-card>
     <mat-card-header>
       <mat-card-title>{{bookEntry.title}}</mat-card-title>
-      <mat-card-subtitle>{{bookEntry.author}}</mat-card-subtitle>
+      <mat-card-subtitle>{{bookEntry.author_name}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <img mat-card-image  alt="Photo of a book missing" src="{{bookEntry.picture !== undefined ? bookEntry.picture.url.replace('S.jpg','M.jpg') : ''}}">
+      <img mat-card-image  alt="The book cover image is not available" src="{{bookEntry.cover_i !== undefined && bookEntry.cover_i > 0 ? 'http://covers.openlibrary.org/b/id/' + bookEntry.cover_i + '-s.jpg'  : ''}}">
     </mat-card-content>
 </mat-card>

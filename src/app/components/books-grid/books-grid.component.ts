@@ -18,45 +18,25 @@ export class BookGridComponent implements OnInit {
   constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {  }
 
   ngOnInit(): void {
-    this.loadingDone = false;
+    this.loadingDone = true;
     this.searchValue = "";
-    this.getDemoBooksData();
   }
 
-  //TODO: Get rid of nested subscribes. replace with better practice functions.
-  getDemoBooksData(){
+
+  textSearchBooks(){
     const classInstance = this;
-    classInstance.olBooksService.tryToGetDemoBookListData()
+    if(classInstance.searchValue == ""){
+      return;
+    }
+    this.loadingDone = false;
+    classInstance.olBooksService.tryToSearchBookListData(classInstance.searchValue)
     .subscribe((data) => {
       const jsonData = JSON.parse(JSON.stringify(data));
-      if('entries' in jsonData){
-        const dataArray: OlBookEntryArray = jsonData.entries;
-        if(dataArray.length > 100) dataArray.length = 100;
+      if('docs' in jsonData){
+        const dataArray: OlBookEntryArray = jsonData.docs;
         dataArray.forEach(function (bookEntry){
           if(bookEntry.url !== undefined){
-            classInstance.olBooksService.tryToGetBookData(bookEntry.url)
-            .subscribe((bookData) => {
-              if(bookData.hasOwnProperty("authors")){
-                let bookJsonObj;
-                try{
-                  bookJsonObj = JSON.parse(JSON.stringify(bookData));
-                  if(bookJsonObj.authors.length > 0){
-                    classInstance.olBooksService.tryToGetAuthorData(bookJsonObj.authors[0].key)
-                    .subscribe((authorData) => {
-                      let authorJsonObj;
-                      try{
-                        authorJsonObj = JSON.parse(JSON.stringify(authorData));
-                        bookEntry.author = authorJsonObj.name;
-                      }catch{
-                        console.log("failed to get authors data from author json.");
-                      }
-                    });
-                  }
-                }catch{
-                  console.log("failed to get authors data from book json.");
-                }
-              }
-            });
+             
           }
         });
         this.bookEntries = dataArray;

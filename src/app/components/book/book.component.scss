@@ -1,22 +1,6 @@
-  
-  .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
-    background-size: cover;
-  }
-mat-card{
-  height:480px;
-  width: 250px;
-}
-mat-card-header{
-  height: 60px;
-}
+.bookItemSet{
+  width:250px;
+  float:left;
+  overflow: hidden;
 
-mat-card-content{
-  padding: 16px;
 }
-
-.mat-card-image{
-  height:420px;
-  width: 250px;
-}
-

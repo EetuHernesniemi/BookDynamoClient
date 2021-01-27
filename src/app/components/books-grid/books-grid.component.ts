@@ -34,11 +34,6 @@ export class BookGridComponent implements OnInit {
       const jsonData = JSON.parse(JSON.stringify(data));
       if('docs' in jsonData){
         const dataArray: OlBookEntryArray = jsonData.docs;
-        dataArray.forEach(function (bookEntry){
-          if(bookEntry.url !== undefined){
-             
-          }
-        });
         this.bookEntries = dataArray;
       }else{
         console.log('Unexpected json data values received');

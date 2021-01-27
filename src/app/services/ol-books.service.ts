@@ -10,7 +10,7 @@ export class OlBooksService {
   constructor(private http: HttpClient) {}
 
   tryToGetDemoBooksData(){
-    const queryUrl = this.serviceBaseUrl + "/people/zxcvb123/lists/OL138839L/seeds.json";
+    const queryUrl = this.serviceBaseUrl + "/people/s_endo/lists/OL185980L/seeds.json";
     return this.http.get(queryUrl);
   }
 }

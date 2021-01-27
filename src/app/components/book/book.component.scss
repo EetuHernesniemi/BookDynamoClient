@@ -1,8 +1,14 @@
 .bookItemSet{
-  width:250px;
-  float:left;
-  overflow: hidden;
+  width:300px;
   display: flex; 
   justify-content: center; 
-  align-items: center;
+  align-items: center
+}
+
+.bookInfoHeader{
+  overflow: hidden;
+  white-space: nowrap;
+  margin-bottom: 0;
+  text-overflow: ellipsis;
+  
 }

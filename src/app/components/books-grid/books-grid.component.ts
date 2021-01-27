@@ -34,13 +34,12 @@ export class BookGridComponent implements OnInit {
   }
 
   gridToRespondToScreenWidth(width: number){
-    console.log(width);
     if(width >= 1200){
       this.screenSize = "lg";
-      this.gridCols = 5;
+      this.gridCols = 4;
     }else if(width >= 992){
       this.screenSize = "md";
-      this.gridCols = 4;
+      this.gridCols = 3;
     }else if(width >= 768){
       this.screenSize = "sm";
       this.gridCols = 2;
@@ -102,6 +101,6 @@ export class BookGridComponent implements OnInit {
   }
 
   tileClick(bookEntry?: OlBookEntry) {
-    console.log(bookEntry);
+    
   }
 }

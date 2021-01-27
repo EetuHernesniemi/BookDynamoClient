@@ -101,6 +101,6 @@ export class BookGridComponent implements OnInit {
   }
 
   tileClick(bookEntry?: OlBookEntry) {
-    
+    this.snackBar.open("You clicked a book tile.", "Ok");
   }
 }

@@ -2,7 +2,7 @@
     <mat-card-header>
       <!-- <div mat-card-avatar class="example-header-image"></div> -->
       <mat-card-title>{{bookEntry.title}}</mat-card-title>
-      <mat-card-subtitle>{{bookEntry.type}}</mat-card-subtitle>
+      <mat-card-subtitle>{{bookEntry.author}}</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
       <!-- <p>
@@ -10,7 +10,7 @@
         A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
         bred for hunting.
       </p> -->
-      <img mat-card-image  alt="Photo of a book missing" src="{{bookEntry.picture !== undefined ? bookEntry.picture.url.replace('S.jpg','L.jpg') : ''}}">
+      <img mat-card-image  alt="Photo of a book missing" src="{{bookEntry.picture !== undefined ? bookEntry.picture.url.replace('S.jpg','M.jpg') : ''}}">
     </mat-card-content>
     <!-- <mat-card-actions>
       <button mat-button>LIKE</button>

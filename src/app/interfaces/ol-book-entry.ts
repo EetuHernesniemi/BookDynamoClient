@@ -4,6 +4,7 @@ export interface OlBookEntry {
     full_url: string,
     picture: any,
     title: string,
+    author: string,
     type: string,
     url: string,
     work_count: number

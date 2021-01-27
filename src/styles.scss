@@ -6,11 +6,11 @@ html, body {
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 /*text styles for error message snackbars in the app*/
-.error-snackbar {
+.errorSnackbar {
     color:yellow;
 }
 
-.dynamo-spinner-wrapper{
+.dynamoSpinnerWrapper{
     display: flex; 
     justify-content: center; 
     align-items: center;

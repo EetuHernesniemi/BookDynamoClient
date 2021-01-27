@@ -23,6 +23,7 @@ export class BookGridComponent implements OnInit {
     this.getDemoBooksData();
   }
 
+  //TODO: Get rid of nested subscribes. replace with better practice functions.
   getDemoBooksData(){
     const classInstance = this;
     classInstance.olBooksService.tryToGetDemoBookListData()
@@ -63,7 +64,7 @@ export class BookGridComponent implements OnInit {
         console.log('Unexpected json data values received');
         this.displayErrorBar();
       }
-      
+      this.loadingDone = true;
     },
     (error) => {
       this.handleHttpError(error);

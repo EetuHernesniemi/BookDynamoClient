@@ -1,5 +1,5 @@
 
-<div class="contentWrapper">
+<div class="contentWrapper" (window:resize)="onResize($event)">
   <div class="row">
     <div class="auto">
       <h1 id="titleHeader">Book Dynamo</h1>
@@ -14,8 +14,8 @@
       </mat-form-field>
     </div>
 </div>
-<div class="gridListWrapper" *ngIf="loadingDone;" >
-  <mat-grid-list cols="5" rowHeight="80px"  >
+<div class="gridListWrapper" *ngIf="loadingDone;">
+  <mat-grid-list [cols]="gridCols" rowHeight="80px"  >
     <mat-grid-tile *ngFor="let bookEntry of bookEntries" (click)="tileClick(bookEntry);">
       <app-book [bookEntry]="bookEntry"></app-book>
     </mat-grid-tile>

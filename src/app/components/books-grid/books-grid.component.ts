@@ -15,13 +15,36 @@ export class BookGridComponent implements OnInit {
   bookEntries: OlBookEntryArray;
   loadingDone: boolean;
   searchValue: string;
+  screenSize: string;
+  gridCols: number
   constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar) {  }
 
   ngOnInit(): void {
     this.loadingDone = true;
     this.searchValue = "";
+    this.gridCols = 1;
   }
 
+  gridToRespondToScreenWidth(width: number){
+    console.log(width);
+    if(width >= 1200){
+      this.screenSize = "lg";
+      this.gridCols = 5;
+    }else if(width >= 992){
+      this.screenSize = "md";
+      this.gridCols = 4;
+    }else if(width >= 768){
+      this.screenSize = "sm";
+      this.gridCols = 2;
+    }else{
+      this.screenSize = "xs";
+      this.gridCols = 1;
+    }
+  }
+
+  onResize(event){
+    this.gridToRespondToScreenWidth(event.target.innerWidth);
+  }
 
   textSearchBooks(){
     const classInstance = this;

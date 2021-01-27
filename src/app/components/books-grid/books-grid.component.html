@@ -1,0 +1,28 @@
+
+<div #contentWrapper class="contentWrapper" (window:resize)="onResize($event)">
+  <div class="row">
+    <div class="auto">
+      <h1 id="titleHeader">Book Dynamo</h1>
+    </div>
+    <div class="col-xs-12 col-sm-8 col-md-9 col-lg-10">
+      <mat-form-field class="formField">
+        <mat-label>Search Books</mat-label>
+        <input matInput type="text" (keyup)="searchValue = $event.target.value" (keyup.enter)="textSearchBooks();">
+        <button mat-button  matSuffix mat-icon-button aria-label="search" (click)="textSearchBooks();">
+          <mat-icon>search</mat-icon>
+        </button>
+      </mat-form-field>
+    </div>
+</div>
+<div class="gridListWrapper" *ngIf="loadingDone;">
+  <mat-grid-list [cols]="gridCols" rowHeight="80px"  >
+    <mat-grid-tile *ngFor="let bookEntry of bookEntries" (click)="tileClick(bookEntry);">
+      <app-book [bookEntry]="bookEntry"></app-book>
+    </mat-grid-tile>
+</mat-grid-list>
+</div>
+<div class="dynamoSpinnerWrapper" *ngIf="!loadingDone;">
+  <mat-spinner aria-label="bookGridSpinner"></mat-spinner>
+</div>
+</div>
+

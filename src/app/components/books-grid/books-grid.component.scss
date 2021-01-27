@@ -1,0 +1,31 @@
+mat-grid-tile {
+    background: #cccccc;
+    padding-top: 0;
+}
+
+.formField {
+  width: 250px;
+}
+
+.contentWrapper{
+  width:90%;
+  height:90%;
+  margin: 0 auto;
+  padding-top:60px; /*mobile adjustment needed*/
+  overflow: hidden;
+
+}
+
+#titleHeader{
+  overflow: hidden;
+  margin-bottom: 0;
+  margin-right: 1rem;
+  margin-left: 1rem;
+  height:37px;
+  padding-top:13px;
+}
+
+.gridListWrapper{
+  overflow-y: auto;
+  height:100%;
+}

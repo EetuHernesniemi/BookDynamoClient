@@ -10,7 +10,7 @@ mat-grid-tile {
   width:90%;
   height:90%;
   margin: 0 auto;
-  padding-top:60px; /*mobile adjustment needed*/
+  padding-top:8px;
   overflow: hidden;
 }
 
@@ -23,7 +23,13 @@ mat-grid-tile {
   padding-top:13px;
 }
 
-.gridListWrapper{
+.gridListAreaWrapper{
   overflow-y: auto;
   height:100%;
+}
+
+.noResultsWrapper{
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
 }

@@ -20,5 +20,4 @@ export class BookDialogComponent implements OnInit {
   closeDialog(){
     this.dialogRef.close();
   }
-
 }

@@ -6,6 +6,7 @@ import { OlBookEntryArray } from 'src/app/interfaces/ol-book-entry-array';
 import { OlBooksService } from 'src/app/services/ol-books.service';
 import {MatDialog} from '@angular/material/dialog';
 import { BookDialogComponent } from '../book-dialog/book-dialog.component';
+import {PageEvent, MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-books-grid',
@@ -19,9 +20,13 @@ export class BookGridComponent implements OnInit {
   searchValue: string;
   screenSize: string;
   gridCols: number
-
-  @ViewChild('contentWrapper')
-  contentWrapper: ElementRef;
+  pageLength: number;
+  pageSize: number;
+  pageSizeOptions: number[];
+  pageIndex: number;
+  pageEvent: PageEvent;
+  @ViewChild('contentWrapper') contentWrapper: ElementRef;
+  
 
   constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar, private cdRef:ChangeDetectorRef, public dialog: MatDialog) {  }
 
@@ -55,18 +60,34 @@ export class BookGridComponent implements OnInit {
     this.gridToRespondToScreenWidth(event.target.innerWidth);
   }
 
+  setPageSizingOptions(currentPageLength: number){
+    let optionsStr: string;
+    if(currentPageLength < 11){
+      optionsStr = "10";
+    }else if(currentPageLength < 21){
+      optionsStr = "10,20";
+    }else{
+      optionsStr = "10,20,50";
+    }
+    this.pageSizeOptions = optionsStr.split(',').map(str => +str);
+  }
+
   textSearchBooks(){
-    const classInstance = this;
-    if(classInstance.searchValue == ""){
+    //No searching without search value
+    //The open library api response is unusable with 1-2 characters long search.
+    if(this.searchValue == "" || this.searchValue.length <= 2){ 
       return;
     }
     this.loadingDone = false;
-    classInstance.olBooksService.tryToSearchBookListData(classInstance.searchValue)
+    this.pageLength = 0;
+    this.olBooksService.tryToSearchBookListData(this.searchValue)
     .subscribe((data) => {
       const jsonData = JSON.parse(JSON.stringify(data));
       if('docs' in jsonData){
         const dataArray: OlBookEntryArray = jsonData.docs;
         this.bookEntries = dataArray;
+        this.pageLength = dataArray.length;
+        this.setPageSizingOptions(this.pageLength);
       }else{
         console.log('Unexpected json data values received');
         this.displayErrorBar();

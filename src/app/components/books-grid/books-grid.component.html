@@ -14,12 +14,28 @@
       </mat-form-field>
     </div>
 </div>
-<div class="gridListWrapper" *ngIf="loadingDone;">
-  <mat-grid-list [cols]="gridCols" rowHeight="80px"  >
-    <mat-grid-tile *ngFor="let bookEntry of bookEntries" (click)="tileClick(bookEntry);">
+<mat-paginator #paginator [length]="pageLength"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event">
+  </mat-paginator>
+<div class="gridListAreaWrapper" *ngIf="loadingDone;">
+  <!-- only for the first page. There might be a better solution. -->
+  <mat-grid-list [cols]="gridCols" rowHeight="80px" *ngIf="pageEvent === undefined && bookEntries !== undefined">
+    <mat-grid-tile *ngFor="let bookEntry of bookEntries.slice(0,50);" (click)="tileClick(bookEntry);">
       <app-book [bookEntry]="bookEntry"></app-book>
     </mat-grid-tile>
-</mat-grid-list>
+  </mat-grid-list>
+  <!-- after the paging has been activated and pageEvent is no longer undefined. -->
+  <mat-grid-list [cols]="gridCols" rowHeight="80px" *ngIf="pageEvent !== undefined">
+    <mat-grid-tile *ngFor="let bookEntry of bookEntries.slice((pageEvent.pageSize * pageEvent.pageIndex),(pageEvent.pageSize * pageEvent.pageIndex) + pageEvent.pageSize);" (click)="tileClick(bookEntry);">
+      <app-book [bookEntry]="bookEntry"></app-book>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- in case there is no search result or no data yet -->
+  <div class="noResultsWrapper" *ngIf="bookEntries == undefined || bookEntries.length == 0">
+    <span>Nothing to see here yet with current search value. Type a book's or an author's name to the search input above. Then press magnifying glass or press enter to get books.</span>
+  </div>
 </div>
 <div class="dynamoSpinnerWrapper" *ngIf="!loadingDone;">
   <mat-spinner aria-label="bookGridSpinner"></mat-spinner>

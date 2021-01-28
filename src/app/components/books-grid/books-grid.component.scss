@@ -2,6 +2,12 @@ mat-grid-tile {
     background: #cccccc;
 }
 
+mat-grid-list{
+  height:100% !important;
+}
+
+
+
 .formField {
   width: 250px;
 }
@@ -23,7 +29,13 @@ mat-grid-tile {
   padding-top:13px;
 }
 
-.gridListWrapper{
+.gridListAreaWrapper{
   overflow-y: auto;
   height:100%;
+}
+
+.noResultsWrapper{
+  width: 100%;
+  text-align: center;
+  margin-top: 24px;
 }

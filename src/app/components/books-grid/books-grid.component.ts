@@ -6,7 +6,7 @@ import { OlBookEntryArray } from 'src/app/interfaces/ol-book-entry-array';
 import { OlBooksService } from 'src/app/services/ol-books.service';
 import {MatDialog} from '@angular/material/dialog';
 import { BookDialogComponent } from '../book-dialog/book-dialog.component';
-import {PageEvent} from '@angular/material/paginator';
+import {PageEvent, MatPaginator} from '@angular/material/paginator';
 
 @Component({
   selector: 'app-books-grid',
@@ -25,8 +25,8 @@ export class BookGridComponent implements OnInit {
   pageSizeOptions: number[];
   pageIndex: number;
   pageEvent: PageEvent;
-  @ViewChild('contentWrapper')
-  contentWrapper: ElementRef;
+  @ViewChild('contentWrapper') contentWrapper: ElementRef;
+  
 
   constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar, private cdRef:ChangeDetectorRef, public dialog: MatDialog) {  }
 
@@ -73,7 +73,9 @@ export class BookGridComponent implements OnInit {
   }
 
   textSearchBooks(){
-    if(this.searchValue == ""){
+    //No searching without search value
+    //The open library api response is unusable with 1-2 characters long search.
+    if(this.searchValue == "" || this.searchValue.length <= 2){ 
       return;
     }
     this.loadingDone = false;

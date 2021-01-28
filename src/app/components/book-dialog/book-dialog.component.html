@@ -1,0 +1,6 @@
+<div class="bookDialogWrapper">
+<div class="bookDialogHeaderArea">
+    <mat-icon class="bookDialoCloseIcon" (click)="closeDialog();">close</mat-icon>
+</div>
+<img class="dialogImg"  src="{{bookEntry.cover_i > 0 ? 'http://covers.openlibrary.org/b/id/' + bookEntry.cover_i + '-L.jpg'  : ''}}">
+</div>

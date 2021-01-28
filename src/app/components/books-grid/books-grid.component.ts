@@ -4,6 +4,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { OlBookEntry } from 'src/app/interfaces/ol-book-entry';
 import { OlBookEntryArray } from 'src/app/interfaces/ol-book-entry-array';
 import { OlBooksService } from 'src/app/services/ol-books.service';
+import {MatDialog} from '@angular/material/dialog';
+import { BookDialogComponent } from '../book-dialog/book-dialog.component';
 
 @Component({
   selector: 'app-books-grid',
@@ -21,7 +23,7 @@ export class BookGridComponent implements OnInit {
   @ViewChild('contentWrapper')
   contentWrapper: ElementRef;
 
-  constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar, private cdRef:ChangeDetectorRef) {  }
+  constructor(private olBooksService: OlBooksService, private snackBar: MatSnackBar, private cdRef:ChangeDetectorRef, public dialog: MatDialog) {  }
 
   ngOnInit(): void {
     this.loadingDone = true;
@@ -101,6 +103,15 @@ export class BookGridComponent implements OnInit {
   }
 
   tileClick(bookEntry?: OlBookEntry) {
-    this.snackBar.open("You clicked a book tile.", "Ok");
+    if(bookEntry.cover_i > 0){
+      const img = new Image();
+      //this preloads the image so the dialog afterwards opens as full size
+      img.src = "http://covers.openlibrary.org/b/id/" + bookEntry.cover_i + "-L.jpg"; 
+      img.onload = () => {
+        const dialogRef = this.dialog.open(BookDialogComponent);
+        dialogRef.componentInstance.bookEntry = bookEntry;
+        dialogRef.componentInstance.dialogRef = dialogRef;
+      }
+    }
   }
 }

@@ -1,0 +1,16 @@
+.bookDialogHeaderArea{
+    display: inline-block;
+    width:100%;
+}
+.bookDialoCloseIcon{
+    float:right;
+}
+
+.bookDialogWrapper{
+}
+/*good mobile (Smarthphone) max-width 480px*/
+@media (max-width: 480px) {
+    .dialogImg {
+        max-width: 64vw;
+    }
+}

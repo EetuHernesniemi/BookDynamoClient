@@ -7,12 +7,14 @@ import { BookGridComponent } from './components/books-grid/books-grid.component'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialDesignModule } from './modules/material-design.module';
 import { BookComponent } from './components/book/book.component';
+import { BookDialogComponent } from './components/book-dialog/book-dialog.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BookGridComponent,
-    BookComponent
+    BookComponent,
+    BookDialogComponent
   ],
   imports: [
     BrowserModule,

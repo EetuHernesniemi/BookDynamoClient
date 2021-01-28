@@ -14,8 +14,13 @@
       </mat-form-field>
     </div>
 </div>
+<mat-paginator [length]="pageLength"
+               [pageSize]="pageSize"
+               [pageSizeOptions]="pageSizeOptions"
+               (page)="pageEvent = $event">
+  </mat-paginator>
 <div class="gridListWrapper" *ngIf="loadingDone;">
-  <mat-grid-list [cols]="gridCols" rowHeight="80px"  >
+  <mat-grid-list [cols]="gridCols" rowHeight="80px"   >
     <mat-grid-tile *ngFor="let bookEntry of bookEntries" (click)="tileClick(bookEntry);">
       <app-book [bookEntry]="bookEntry"></app-book>
     </mat-grid-tile>
